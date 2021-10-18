@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    image: asp-net-react
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    networks:
+      - asp-network
+    depends_on:
+      - "redis"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6378:6379"
+    networks:
+      - asp-network
+
+networks: 
+    asp-network:
+        driver: bridge
